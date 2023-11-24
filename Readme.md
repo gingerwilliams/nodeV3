@@ -59,3 +59,5 @@ not sending this to node package manager, so just create a local package using s
 
         - > note curl github.com/gingerwilliams
     
+7. The name db.json is causing write permission issues. rename this anything else.
+test
