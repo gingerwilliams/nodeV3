@@ -9,6 +9,7 @@ import {
     removeNote
 } from './notes.js'
 import { listNotes } from "./utils.js";
+import { start } from "./server.js";
 
 yargs(hideBin(process.argv))
     .command('new <note>', "Create a new note", () => {}, async (argv) => {
@@ -46,16 +47,17 @@ yargs(hideBin(process.argv))
         const note = await removeNote(argv.id);
         console.log(`Delete Note: ${argv.id}`, note);
     })
-    // .command('web [port]', 'launch website to see notes', yargs => {
-    //   return yargs
-    //     .positional('port', {
-    //       describe: 'port to bind on',
-    //       default: 5000,
-    //       type: 'number'
-    //     })
-    // }, async (argv) => {
-      
-    // })
+    .command('web [port]', 'launch website to see notes', yargs => {
+      return yargs
+        .positional('port', {
+          describe: 'port to bind on',
+          default: 4000,
+          type: 'number'
+        })
+    }, async (argv) => {
+        const notes = await getAllNotes()
+        start(notes, argv.port)
+    })
     .command('clean', 'remove all notes', () => {}, async (argv) => {
         await removeAllNotes()
         console.log("Cleaned");

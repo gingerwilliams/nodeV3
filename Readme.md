@@ -1,3 +1,9 @@
+Commands
+
+```
+Run > note new "Content" -t "Tag1,Tag2"
+```
+
 1. Browser vs Node
     -   no window Global instead
 2. Node REPL
@@ -61,3 +67,44 @@ not sending this to node package manager, so just create a local package using s
     
 7. The name db.json is causing write permission issues. rename this anything else.
 test
+
+
+> node-cli@1.0.0 test
+> node --experimental-vm-modules node_modules/jest/bin/jest.js
+
+  console.log
+    Create New Note |  { tags: [ 'tag1', 'tag2' ], content: 'Test note', id: 1700806427115 }
+
+      at log (src/notes.js:15:13)
+
+(node:17767) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ FAIL  src/tests/notes.test.js
+  ✕ newNote inserts data and returns it (21 ms)
+
+  ● newNote inserts data and returns it
+
+    TypeError: Cannot read properties of undefined (reading 'content')
+
+      27 |
+      28 |   const result = await newNote(note, tags);
+    > 29 |   expect(result.content).toEqual(data.content);
+         |                 ^
+      30 | });
+
+      at Object.content (src/tests/notes.test.js:29:17)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        0.556 s, estimated 1 s
+Ran all test suites.
+➜  nodeV3 git:(main) ✗ 
+
+
+```
+Server Start
+Run > node server.js
+```
+
+Interpolate: Turn data to text on a page
